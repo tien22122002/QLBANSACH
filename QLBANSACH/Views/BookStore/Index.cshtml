@@ -1,0 +1,87 @@
+﻿@using QLBANSACH.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<SACH>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@if (ViewBag.SuccessMessage != null)
+{
+    
+    <div class="bs-toast toast toast-placement-ex m-2 fade bg-success top-50 start-50 translate-middle show" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+        <div class="toast-header">
+            <i class="bx bx-bell me-2"></i>
+            <div class="me-auto fw-semibold">Thông báo</div>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">@ViewBag.SuccessMessage</div>
+    </div>
+}
+<h2 style="padding-top: 20px;">Sách mới</h2>
+<div class="row">
+    @foreach (var sach in Model)
+    {
+        <div class="col-sm-4 col-lg-4 col-md-4">
+            <ul class="product_box">
+                <a href="@Url.Action("Details", "BookStore", new { id = sach.Masach })" style="display: flex;flex-direction: column;justify-content: space-between;height: 100%;">
+                    <div class="hinhanh_sanpham">
+                        <img alt="@sach.Tensach" src="~/image/@sach.Anhbia" width="100%" />
+                    </div>
+                    <div>
+                        <br />
+                        <h4 style="height:40px;">
+                            @sach.Tensach
+                        </h4>
+
+                        <p></p>
+                        <div class="ratings">
+                            <p class="pull-right">16 reviews</p>
+                            <p style="color: #ff8b00;">
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+                                <i class="fa-solid fa-star"></i>
+
+                            </p>
+                        </div>
+                    </div>
+                </a>
+            </ul>
+        </div>
+    }
+</div>
+
+<div class="MenuTrang">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+</div>
+<style>
+    .MenuTrang {
+        text-align: center;
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+    .pagination li.active a:not(.page-link) {
+        border-color: #26a233;
+        background-color: #26a233;
+    }
+        .pagination li {
+            box-sizing: border-box;
+        }
+        .pagination a {
+            line-height: 1;
+            text-align: center;
+            min-width: calc( 2.1875rem + 0px );
+            margin-left: 0.1875rem;
+            border-radius: 0.25rem;
+            padding: 0.625rem 0.5125rem;
+            position: relative;
+            display: block;
+            color: #697a8d;
+            background-color: white;
+            border: solid 1px #665c5c4a;
+            transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        
+</style>
+

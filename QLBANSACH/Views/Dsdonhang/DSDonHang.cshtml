@@ -1,0 +1,151 @@
+﻿@model List<QLBANSACH.Models.DonDatHang>
+
+@{
+    ViewBag.Title = "DSDonHang";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<script>
+    var elementHome = document.getElementById("menu-home");
+    var elementQL = document.getElementById("menu-donhang");
+    var element = document.getElementById("item-qldd");
+
+    elementHome.className = "menu-item";
+    elementQL.classList.add("active", "open");
+    element.classList.add("active");
+</script>
+<div style="text-align: -webkit-center;">
+    <h2>Đơn Hàng Đã Đặt</h2>
+    
+    <div class="card" style="width:90%">
+        <table class="table table-bordered" style="text-align:center">
+            <tr>
+                <th>Mã đơn hàng</th>
+                <th style="width: 15%">Ngày giao</th>
+                <th style="width: 20%">Tình trạng đơn hàng</th>
+                <th>Tên sách</th>
+                <th>Số lượng</th>
+                <th>Thời gian</th>
+                <th>Thành Tiền</th>
+            </tr>
+            @{ int i = 0;}
+            @foreach (var donDatHang in Model)
+            {
+                i++;
+                <tr class="@((i % 2 == 0) ? "table-primary" : "table-light")">
+                    <td rowspan="@donDatHang.CountSach">
+                        <a href="@Url.Action("ChiTietDonHang","Dsdonhang", new {maDonHang = donDatHang.MaDonHang})"><i class="fa-solid fa-eye"></i></a>
+                        @donDatHang.MaDonHang
+                    </td>
+                    <td rowspan="@donDatHang.CountSach" >@donDatHang.NgayGiao</td>
+                    <td rowspan="@donDatHang.CountSach">
+                        @if (donDatHang.TrangThaiGiaoHang == "Đã giao hàng")
+                        {
+                            @donDatHang.TrangThaiGiaoHang
+                        }
+                        else
+                        {
+                            <form method="post" action="@Url.Action("CapNhatGiaoHang", "Dsdonhang")">
+                                @Html.Hidden("maDonHang", donDatHang.MaDonHang)
+                                @Html.Hidden("maTinhTrang", donDatHang.MaTinhTrang)
+                                <input type="submit" value="Xác nhận" class="btn rounded-pill btn-success" />
+                            </form>
+                            @donDatHang.TrangThaiGiaoHang
+
+                        }
+
+                    </td>
+                    @if (donDatHang.CountSach == 0)
+                    {
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    }
+                    else if (donDatHang.CountSach == 1)
+                    {
+                        foreach (var chiTiet in donDatHang.ChiTietDonDatHangs)
+                        {
+                            <td style="text-align: left; font-size: large;">
+                                <img alt="@chiTiet.Sach.Tensach" src="~/image/@chiTiet.Sach.Anhbia" style="width: 10%"/>
+                                <b>@chiTiet.Sach.Tensach</b>
+                                
+                            </td>
+                            <td style="font-size: large;">
+                                @chiTiet.SoLuong
+                            </td>
+                            <td>
+                                @chiTiet.TenLoaiThue
+                            </td>
+                            <td>
+                                @String.Format("{0:0,0}", chiTiet.DonGia)
+                            </td>
+                        }
+                        foreach (var chiTiet in donDatHang.ChiTietDonThues)
+                        {
+                            <td style="text-align: left; font-size: large;">
+                                <img alt="@chiTiet.Sach.Tensach" src="~/image/@chiTiet.Sach.Anhbia" style="width: 10%" />
+                                <b>@chiTiet.Sach.Tensach</b>
+                            </td>
+                            <td style="font-size: large;">
+                                @chiTiet.SoLuong
+                            </td>
+                            <td>
+                                @chiTiet.TenLoaiThue
+                            </td>
+                            <td>
+                                @String.Format("{0:0,0}", chiTiet.DonGia)
+                            </td>
+                        }
+                    }
+                </tr>
+                if (donDatHang.CountSach > 1)
+                {
+                    foreach (var chiTiet in donDatHang.ChiTietDonDatHangs)
+                    {
+                        <tr class="@((i % 2 == 0) ? "table-primary" : "table-light")">
+                            <td style="text-align: left; font-size: large;">
+                                <img alt="@chiTiet.Sach.Tensach" src="~/image/@chiTiet.Sach.Anhbia" style="width: 10%" />
+                                <b>@chiTiet.Sach.Tensach</b>
+                            </td>
+                            <td style="font-size: large;">
+                                @chiTiet.SoLuong
+                            </td>
+                            <td>
+                                @chiTiet.TenLoaiThue
+                            </td>
+                            <td>
+                                @String.Format("{0:0,0}", chiTiet.DonGia)
+                            </td>
+                        </tr>
+                    }
+                    foreach (var chiTiet in donDatHang.ChiTietDonThues)
+                    {
+                        <tr class="@((i % 2 == 0) ? "table-primary" : "table-light")">
+                            <td style="text-align: left; font-size: large;">
+                                <img alt="@chiTiet.Sach.Tensach" src="~/image/@chiTiet.Sach.Anhbia" style="width: 10%" />
+                                <b>@chiTiet.Sach.Tensach</b>
+                            </td>
+                            <td style="font-size: large;">
+                                @chiTiet.SoLuong
+                            </td>
+                            <td>
+                                @chiTiet.TenLoaiThue
+                            </td>
+                            <td>
+                                @String.Format("{0:0,0}", chiTiet.DonGia)
+                            </td>
+                        </tr>
+                        
+                    }
+                }
+            }
+        </table>
+    </div>
+</div>
+
+
+    <style>
+        .trangthai td {
+            border-style: none;
+        }
+    </style>

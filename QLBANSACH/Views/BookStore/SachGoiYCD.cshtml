@@ -1,0 +1,66 @@
+﻿
+@{
+    Layout = null;
+}
+
+<div class="container-fluid">
+    <h3>Sách bạn có thể quan tâm</h3>
+    <div class="row">
+        <div class="col">
+            <div class="vendor-carousel">
+                @foreach (var sach in Model)
+                {
+                    <div class="vendor-item  p-4" style="">
+                        <a href="@Url.Action("Details", "BookStore", new { id = sach.Masach })">
+                            <img src="~/image/@sach.Anhbia" width="200px" style="border: solid 2px #128022;" class="d-block w-100" />
+                            <p style="width:150px">@sach.Tensach</p>
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    .container-fluid {
+        display: flex;
+        place-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+        padding-left: 3rem !important;
+        padding-right: 3rem !important;
+    }
+
+    .col {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%;
+        position: relative;
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .vendor-carousel {
+        display: flex; /* Sử dụng flexbox để xếp các phần tử trên cùng một hàng */
+        flex-wrap: nowrap; /* Ngăn các phần tử con xuống dòng */
+    }
+
+    .vendor-item {
+        flex: 0 0 auto; /* Đảm bảo các phần tử con không thay đổi kích thước */
+        margin-right: 15px; /* Khoảng cách giữa các phần tử con */
+        background-color: white;
+        border-radius: 5px;
+    }
+
+    .w-100 {
+        width: 150px !important;
+    }
+</style>

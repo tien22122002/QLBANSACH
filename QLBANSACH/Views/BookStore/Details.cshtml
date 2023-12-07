@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@helper Truncate(string input, int length)
+{
+    if (input.Length <= length)
+    {
+        @Html.Raw(input)
+    }
+    else
+    {
+        @Html.Raw(input.Substring(0, length)) <text>...</text>
+    }
+}
+<h2>THÔNG TIN CHI TIẾT SÁCH</h2>
+<div style="display:flex;">
+    <div style="width:25%; float: left; border-left: dotted 1px; border-color: azure; padding:30px">
+        <img src="~/image/@Model.Anhbia" width="100%" style="border: solid 2px #128022;" />
+    </div>
+    <div style="width: 60%; display: flex; flex-direction: column; padding: 30px;">
+        <div float:left; padding: 10px;">
+            <h4 style="font-weight: bold; color:red; font-size:22px;">Sách: @Model.Tensach </h4>
+            <p style="text-align: justify;"><span style="font-weight: bold; ">Mô tả: </span>@Truncate(Model.Mota, 9000) </p>
+
+            <p style="font-weight: bold;font-size: 18px">Giá bán: <span style="color:red; font-size: 16pt;"> @String.Format("{0:0,0}", Model.Giaban) VNĐ</span></p>
+
+        </div>
+        @if (Model.Soluongton == 0)
+        {
+            <p style="font-weight: bold; color:red; font-size: 16pt;">Hết sách</p>
+        }
+        <div style="display: flex; justify-content: flex-end;">
+            @if (Model.Soluongton > 0)
+            {
+                <div>
+                    <a href="@Url.Action("ThemGiohang", "Giohang", new { iMasach = Model.Masach, strURL = Request.Url.PathAndQuery })" class="btn rounded-pill btn-outline-success" style=" margin-right: 30px;">
+                        Thêm vào giỏ hàng
+                    </a>
+                </div>
+                <div>
+                    <a href="@Url.Action("DatNgay", "Giohang", new { iMasach = Model.Masach })" class="btn rounded-pill btn-success">
+                        <i class="fa-solid fa-money-bill-1-wave" style="font-size: 18px"></i> Mua ngay
+                    </a>
+
+                </div>
+
+            }
+
+
+        </div>
+    </div>
+</div>
+@Html.Action("SachGoiYCD", "BookStore", new {maCD = Model.MaNXB})
+

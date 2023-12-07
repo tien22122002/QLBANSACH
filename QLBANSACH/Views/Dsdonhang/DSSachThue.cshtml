@@ -1,0 +1,124 @@
+﻿@model List<QLBANSACH.Models.DonDatHang>
+
+@{
+    ViewBag.Title = "DSSachThue";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<script>
+    var elementHome = document.getElementById("menu-home");
+    var elementQL = document.getElementById("menu-donhang");
+    var element = document.getElementById("item-qldt");
+
+    elementHome.className = "menu-item";
+    elementQL.classList.add("active", "open");
+    element.classList.add("active");
+</script>
+<div style="text-align: -webkit-center;">
+    <div id="successModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Thành công</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Xử lý thành công. Nhấn đóng để mở lại trang danh sách đơn hàng.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (ViewBag.ShowSuccessModal != null && ViewBag.ShowSuccessModal)
+    {
+        <script>
+            $(document).ready(function () {
+                $('#successModal').modal('show');
+            });
+        </script>
+    }
+    <h2>Đơn đã thuê</h2>
+    @foreach (var donDatHang in Model)
+    {
+        <div class="card" style="width:90%">
+            <div style="text-align: left; display: flex; justify-content: space-between;">
+                <h5 class="card-header">Mã đơn hàng: @donDatHang.MaDonHang</h5>
+                @*<h4 class="card-header" style="color: red">Tổng đơn hàng: @String.Format("{0:0,0}", donDatHang.tongGiaTri) VNĐ </h4>*@
+            </div>
+
+            <div class="demo-inline-spacing" style="text-align: left; margin-top:0px">
+                <div class="table-responsive text-nowrap" style=" margin-top:0px">
+                    <table class="table">
+                        <tbody class="trangthai">
+                            <tr>
+                                <td>Ngày đặt hàng: <b>@donDatHang.NgayDat</b></td>
+                                <td style="padding-bottom: 25px;">Trạng thái giao hàng: <b>@donDatHang.TrangThaiGiaoHang</b></td>
+                                <td style="width: 30%">
+                                    <a href="@Url.Action("ChiTietDonHang", "Dsdonhang", new {maDonHang = donDatHang.MaDonHang})" class="btn btn-outline-secondary">Xem chi tiết</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="table-responsive text-nowrap">
+                <table class="table" style="text-align:center">
+                    <caption class="ms-4">
+                        Danh sách sản phẩm
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th>Tên sách</th>
+                            <th style="width:17%">Hình ảnh</th>
+                            <th style="width:12%">Số lượng</th>
+                            <th style="width:12%">Đơn giá</th>
+                            <th style="width:12%">Thời gian</th>
+                            <th style="width:12%">Thành Tiền</th>
+                            <th style="width:12%">Trạng Thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var chiTiet in donDatHang.ChiTietDonThues)
+                        {
+                            decimal? ThanhTien = chiTiet.SoLuong * chiTiet.DonGia * chiTiet.LoaiThue.TiLeGia;
+                            <tr>
+                                <td>@chiTiet.Sach.Tensach</td>
+                                <td><img alt="@chiTiet.Sach.Tensach" src="~/image/@chiTiet.Sach.Anhbia" width="45%" /></td>
+
+                                <td><b>@chiTiet.SoLuong</b></td>
+                                <td><b>@String.Format("{0:0,0}", chiTiet.DonGia) VNĐ </b></td>
+                                <td><b>@chiTiet.TenLoaiThue</b></td>
+                                <td><b>@String.Format("{0:0,0}", ThanhTien) VNĐ </b></td>
+                                <td>
+                                    @if (chiTiet.TinhTrangTraSach == "Đang trả sách")
+                                    {
+                                        <form method="post" action="@Url.Action("CapNhatTraHang", "Dsdonhang")">
+                                            @Html.Hidden("maDonHang", donDatHang.MaDonHang)
+                                            @Html.Hidden("maSach", chiTiet.MaSach)
+                                            <input type="submit" value="Xác nhận đã trả" class="btn rounded-pill btn-success" />
+                                        </form>
+                                        <b>@chiTiet.TinhTrangTraSach</b>
+                                    }
+                                    else
+                                    {
+
+                                        <b>@chiTiet.TinhTrangTraSach</b>
+
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <hr class="my-5">
+    }
+</div>
+<style>
+    .trangthai td {
+        border-style: none;
+    }
+</style>

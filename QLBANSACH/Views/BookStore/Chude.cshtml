@@ -1,0 +1,14 @@
+﻿@model IEnumerable<QLBANSACH.Models.CHUDE>
+
+<div>
+    @foreach (var item in Model)
+    {
+        <div class="list-chude">
+            <a href="@Url.Action("SPTheochude", "BookStore", new {id= item.MaCD})" class="list-group-item">
+                <p>@item.TenChuDe</p><i class="fa-solid fa-chevron-right"></i>
+            </a>
+        </div>
+    }
+
+</div>
+

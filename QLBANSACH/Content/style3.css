@@ -1,0 +1,320 @@
+﻿#header {
+    display: flex;
+    align-items: center;
+    height: 100px;
+    background-color: #f0f0f0;
+    justify-content: space-between;
+}
+
+#header-end {
+    display: flex;
+    height: 40px;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    font-size: 18px;
+}
+
+#logo {
+    width: 360px;
+    margin-left: 40px;
+}
+
+    #logo img {
+        width: 100%;
+    }
+
+#search {
+    background: white;
+    border-radius: 30px;
+}
+
+    #search input {
+        float: left;
+        width: 400px;
+        height: 45px;
+        border: 0px solid #ccc;
+        border-radius: 20px;
+        padding: 10px 20px 10px 40px;
+    }
+
+    #search button {
+        width: 85px;
+        height: 40px;
+        border: none;
+        border-radius: 23px;
+        background-color: #057A45;
+        color: white;
+        font-weight: bold;
+        margin: 4px;
+    }
+
+        #search button img {
+            width: 100%;
+        }
+
+#cart {
+    width: 50px;
+    position: relative;
+}
+
+    #cart img {
+        width: 100%;
+    }
+
+#cart-count {
+    position: absolute;
+    top: -11px;
+    right: 14px;
+    width: 18px;
+    height: 18px;
+    border-radius: 10px;
+    background-color: #f00;
+    color: #fff;
+    text-align: center;
+    font-size: 17px;
+    line-height: 17px;
+}
+#menu {
+    height: 50px;
+}
+
+    #menu ul {
+        display: flex;
+    }
+
+    #menu li {
+        list-style-type: none;
+    }
+
+    #menu a {
+        display: block;
+        padding: 15px 20px;
+        text-decoration: none;
+        color: #000;
+    }
+
+        #menu a:hover {
+            background-color: #ccc;
+        }
+
+#content {
+    min-height: 500px;
+    margin-top: 10px;
+}
+
+#footer {
+    height: 50px;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+    #footer p {
+        text-align: center;
+    }
+
+.fa-cart-shopping {
+    font-size: 20px;
+    color: #057A45;
+}
+
+.header-1 {
+    height: 45px;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAAtCAIAAADk7EauAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNS1jMDE0IDc5LjE1MTQ4MSwgMjAxMy8wMy8xMy0xMjowOToxNSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIChNYWNpbnRvc2gpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOjk3MTA1QjRFNUU3MjExRTRBMTM5OTZGNURGNEMyOTBFIiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOjk3MTA1QjRGNUU3MjExRTRBMTM5OTZGNURGNEMyOTBFIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6OTcxMDVCNEM1RTcyMTFFNEExMzk5NkY1REY0QzI5MEUiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6OTcxMDVCNEQ1RTcyMTFFNEExMzk5NkY1REY0QzI5MEUiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5ldbQbAAAAGUlEQVR42mLhqLZkAAMmBhgYZQ0lFkCAAQCfAAEZpcQByAAAAABJRU5ErkJggg==) top repeat-x;
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-while {
+    color: white;
+    font-size: larger;
+    margin: 10px;
+    margin-left: 30px;
+}
+
+a, .footer p {
+    color: black;
+    text-decoration: none
+}
+
+.support {
+    margin: 8px;
+}
+
+    .support a {
+        color: white;
+        padding: 5px;
+    }
+
+.login {
+    margin: 0 25px;
+    font-size: 18px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.login-page {
+    margin-left: 260px;
+    margin-top: 20px;
+    text-align: -webkit-center;
+}
+h2 {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #333;
+}
+
+/* Định dạng hàng sản phẩm */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 20px auto;
+}
+
+/* Định dạng cột sản phẩm */
+.col-sm-4,
+.col-lg-4,
+.col-md-4 {
+    width: 290px;
+    box-sizing: border-box;
+    padding: 10px;
+    height: 600px;
+    margin: 0 14px;
+}
+ul.product_box {
+    background-color: white;
+    padding: 8px;
+    height: 100%;
+}
+
+/* Định dạng đánh giá sản phẩm */
+.ratings {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    margin-right: 15px;
+}
+
+    /* Định dạng số lượng đánh giá */
+    .ratings .pull-right {
+        margin-left: auto;
+    }
+
+    /* Định dạng sao đánh giá */
+    .ratings .glyphicon-star {
+        color: gold;
+    }
+
+.list-chude {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 12px;
+    margin-bottom: -1px;
+    background-color: #fff;
+    border: 1px solid rgba(0,0,0,.125);
+    width: 300px;
+    padding-left: 40px;
+    padding-right: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+    .list-group-item p {
+        margin-bottom: 0;
+    }
+
+    .list-group-item:hover {
+        background-color: #f8f9fa;
+    }
+
+    .list-group-item.active {
+        z-index: 2;
+        color: #fff;
+        background-color: #007bff;
+        border-color: #007bff;
+    }
+.pagination {
+    justify-content: center;
+}
+
+#datmua a {
+    background-color: red;
+    color: white;
+    width: 120px;
+    height: 35px;
+    display: block;
+    text-align: center;
+    padding-top: 8px;
+    font-weight: bold;
+    margin: 6px;
+    border-radius: 5px;
+}
+
+    #datmua a :hover {
+        background-color: gray;
+        color: red;
+    }
+
+.tr-lksp1, .tr-lksp2 {
+    background-color: #ffffff;
+    font-weight: bold;
+    text-align: center;
+}
+
+.tr-lksp2 {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.tr-lksp1 img {
+    width: 100%;
+    display: flex;
+}
+
+.tr-lksp {
+    height: 42px;
+    color: #ffd154;
+}
+
+.tb-sp {
+    border: 3px solid #3D3D3D;
+    border-radius: 11px;
+    background-color: #3D3D3D;
+}
+
+.delete-now-btn, .update-now-btn, .buy-now-btn {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.update-now-btn {
+    background-color: gold;
+}
+
+.buy-now-btn {
+    background-color: green;
+}
+.user:hover {
+    color: chartreuse;
+}

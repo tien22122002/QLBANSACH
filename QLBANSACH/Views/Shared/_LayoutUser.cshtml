@@ -1,0 +1,150 @@
+﻿@using QLBANSACH.Models;
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <title>Tienbook - hiệu sách online trực tuyến cho mọi người</title>
+
+    <link rel="stylesheet" href="~/Content/assets/vendor/fonts/boxicons.css" />
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="~/Content/assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="~/Content/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="~/Content/assets/css/demo.css" />
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="~/Content/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+
+    <link rel="stylesheet" href="~/Content/assets/vendor/libs/apex-charts/apex-charts.css" />
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="~/Content/style3.css" />
+    <!-- Page CSS -->
+    <!-- Helpers -->
+    <script src="~/Content/assets/vendor/js/helpers.js"></script>
+
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="~/Content/assets/js/config.js"></script>
+
+    <script src="~/tinymce/js/tinymce/tinymce.min.js"></script>
+    <script>tinymce.init({ selector: "textarea" });</script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+<body>
+    <div>
+        <div id="header">
+            <div id="logo">
+                <a href="/BookStore/Index"><img src="~/image/logo.png" alt="Vinabook" /></a>
+            </div>
+            <div id="search">
+                <form action="~/search" method="get">
+                    <input type="text" name="q" placeholder="Tìm kiếm sách..." />
+                    <button type="submit">Tìm kiếm</button>
+                </form>
+            </div>
+            <div id="header-end">
+                <div id="cart">
+                    <a href="/Giohang/GioHang">
+                        <i class="fa-solid fa-cart-shopping"> </i>
+                    </a>
+                    <span id="cart-count">@Html.Action("GiohangPartial", "Giohang")</span>
+                </div>
+                @if (Session["Taikhoan"] != null)
+                {
+                    <div class="login">
+                        <h4 style="margin-bottom: 0px;">Xin chào:</h4>
+                        <h2 class="nav-link dropdown-toggle hide-arrow user" data-bs-toggle="dropdown" aria-expanded="false" style=" color: #057A45; margin: 3px 20px 0 0; font-size: 24px; cursor: pointer;"> @((Session["Taikhoan"] as KHACHHANG).HoTen)</h2>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li class="dropdown-item"><i class="bx bx-user me-2"></i><span class="align-middle"><a href="@Url.Action("MyProfile", "Nguoidung")">My Profile</a></span></li>
+                            <li><div class="dropdown-divider"></div></li>
+                            <li class="dropdown-item"><a href="@Url.Action("DonHangDaDat", "Donhang")">Đơn hàng đã mua</a></li>
+                            <li class="dropdown-item"><a href="@Url.Action("DonDaThue", "Donhang")">Đơn hàng đã thuê</a></li>
+                            <li><div class="dropdown-divider"></div></li>
+                            <li class="dropdown-item"><a href="@Url.Action("Dangxuat", "Giohang")">Đăng xuất<i class="fa-solid fa-right-from-bracket"></i></a></li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <div class="login">
+                        <a href="/Nguoidung/Dangnhap">Đăng nhập |</a>
+                        <a href="/Nguoidung/Dangky"> Đăng ký</a>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="header-1">
+            <div style="display:flex">
+                <i style='font-size: 35px; margin: 5px; color: white; margin-left: 40px; ' class='fas'>&#xf03a;</i>
+                <p class="text-while">Danh Mục Sách <i class="fa-solid fa-chevron-down"></i></p>
+            </div>
+            <div class="support">
+                <a href="#" style="border-right: 3px solid;"><i style='font-size:22px' class='fas'>&#xf095;</i> Hotline: <b style="font-size:18px;">0366 542 543</b> </a>
+                <a href="#"><i style='font-size:22px' class="fa-sharp fa-regular fa-comments"></i> Hỗ trợ trực tuyến</a>
+            </div>
+        </div>
+        @*<div style="float:left;">
+                @Html.Action("Chude", "BookStore")
+                @Html.Action("Nhaxuatban", "BookStore")
+            </div>
+            <div id="content">
+                @RenderBody()
+            </div>*@
+        <div class="containerss">
+            <div class="left-column">
+                <div style="float:left;">
+                    @Html.Action("Chude", "BookStore")
+                    @Html.Action("Nhaxuatban", "BookStore")
+                </div>
+            </div>
+            <div class="right-column">
+                <div id="content">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+        <div style="height: 50px;"></div>
+        <div id="footer">
+            <p>© 2023 Tienbook. All rights reserved.</p>
+        </div>
+    </div>
+    <style>
+        .containerss {
+            display: flex; /* Đảm bảo chiều cao ít nhất bằng chiều cao của viewport */
+        }
+
+        .left-column {
+            flex: 1; /* Cột trái sẽ mở rộng ra fill phần trống */
+        }
+
+        .right-column {
+            flex: 6; /* Cột phải sẽ mở rộng gấp đôi cột trái */
+        }
+    </style>
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+    <script src="~/Content/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="~/Content/assets/vendor/libs/popper/popper.js"></script>
+    <script src="~/Content/assets/vendor/js/bootstrap.js"></script>
+    <script src="~/Content/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+    <script src="~/Content/assets/vendor/js/menu.js"></script>
+    <!-- endbuild -->
+    <!-- Vendors JS -->
+    <script src="~/Content/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+    <!-- Main JS -->
+    <script src="~/Content/assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="~/Content/assets/js/dashboards-analytics.js"></script>
+
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+</body>
+</html>

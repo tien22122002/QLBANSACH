@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "Đangky";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="authentication-wrapper authentication-basic container-p-y" style="display: flex; justify-content: center;">
+    <div class="authentication-inner"  style="width: 28%">
+        <!-- Register Card -->
+        <div class="card">
+            <div class="card-body">
+                <h2 style="text-align:center"> ĐĂNG KÝ THÀNH VIÊN</h2>
+
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "mb-3", @id = "formAuthentication" }))
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="mb-3">
+                        <label for="username" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Họ & Tên khách hàng</font></font></label>
+                        @Html.TextBox("HotenKH", null, new { @class = "form-control", @id = "html5-text-input", placeholder = "Họ tên khách hàng" }) @ViewData["Loi1"]
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tên đăng nhập</font></font></label>
+                        @Html.TextBox("TenDN", null, new { @class = "form-control", @id = "html5-text-input", placeholder = "Tên đăng nhập" }) @ViewData["Loi2"]
+                    </div>
+                    
+                    <div class="mb-3 row">
+                        <label for="email" class="col-md-2 col-form-label" style="padding-left: 0px; width: 33.666667%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mật khẩu</font></font></label>
+                        <div class="col-md-10" style=" width: 66.333333%; padding-right: 0; ">
+                            <div class="input-group input-group-merge">
+                                @Html.Password("Matkhau", null, new { @class = "form-control", @id = "password", placeholder = ".............." }) @ViewData["Loi3"]
+                                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="username" class="col-md-2 col-form-label" style="padding-left: 0px; width: 33.666667%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nhập lại mật khẩu</font></font></label>
+                        <div class="col-md-10" style=" width: 66.333333%; padding-right: 0; ">
+                            <div class="input-group input-group-merge">
+                                @Html.Password("Matkhaunhaplai", null, new { @class = "form-control", @id = "password", placeholder = ".............." }) @ViewData["Loi4"]
+                                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-3 row">
+                        <label for="email" class="col-md-2 col-form-label" style="padding-left: 0px; width: 33.666667%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Email</font></font></label>
+                        <div class="col-md-10" style=" width: 66.333333%; padding-right: 0; ">
+                            @Html.TextBox("Email", null, new { @class = "form-control", @id = "email", placeholder = "Nhập email của bạn" })@ViewData["Loi5"]
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label for="username" class="col-md-2 col-form-label" style="padding-left: 0px; width: 33.666667%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Số điện thoại</font></font></label>
+                        <div class="col-md-10" style=" width: 66.333333%; padding-right: 0; ">
+                            @Html.TextBox("Dienthoai", null, new { @class = "form-control", @id = "html5-text-input", placeholder = "Nhập số điện thoại của bạn" })@ViewData["Loi6"]
+                        </div>
+                    </div>
+                    <div class="md-3 row">
+                        <label for="username" class="col-md-2 col-form-label" style="padding-left: 0px; width: 33.666667%;"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Ngày sinh</font></font></label>
+                        <div class="col-md-10" style=" width: 66.333333%; padding-right: 0; ">
+                            <input type="date" name="Ngaysinh" id="html5-date-input" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="username" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Địa chỉ nhận hàng</font></font></label>
+                        @Html.TextBox("Diachi", null, new { @class = "form-control", @id = "html5-text-input", placeholder = "Địa chỉ...." })
+                    </div>
+
+
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="terms-conditions" name="terms">
+                            <label class="form-check-label" for="terms-conditions">
+                                <font style="vertical-align: inherit;">
+                                    <font style="vertical-align: inherit;">
+                                        Tôi đồng ý
+                                    </font>
+                                </font><a href="javascript:void(0);"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">chính sách và điều khoản bảo mật</font></font></a>
+                            </label>
+                        </div>
+                    </div>
+                    <button class="btn btn-success d-grid w-100"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Đăng ký</font></font></button>
+                }
+
+                <p class="text-center">
+                    <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Đã có tài khoản?</font></font></span>
+                    <font style="vertical-align: inherit;"><a href="Dangnhap"><span><font style="vertical-align: inherit;">Đăng nhập</font></span></a></font><a href="auth-login-basic.html">
+                        <span><font style="vertical-align: inherit;"></font></span>
+                    </a>
+                </p>
+            </div>
+        </div>
+        <!-- Register Card -->
+    </div>
+</div>
+<style>
+    .form-check-input:checked {
+        background-color: #4eab1c;
+        border-color: #71dd37;
+        box-shadow: 0 2px 4px 0 rgb(105 255 112 / 40%);
+    }
+</style>

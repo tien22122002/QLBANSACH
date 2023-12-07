@@ -1,0 +1,113 @@
+﻿@model List<QLBANSACH.Models.DonDatHang>
+@{
+    ViewBag.Title = "TraSach";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<div class="demo-inline-spacing" style="text-align: -webkit-center; margin-top: 0px">
+    <h2>TRẢ SÁCH</h2>
+    <div class="table-responsive text-nowrap" style=" margin-top:0px">
+        @using (Html.BeginForm("TraSach", "DonHang", FormMethod.Post))
+        {
+            <table class="table" style="width: 80%">
+
+                <tbody>
+                    @foreach (var donHang in Model)
+                    {
+                        
+                    <thead>
+                        <tr>
+                            <th width="50%">
+                                <input type="number" name="maDonHang" value="@donHang.MaDonHang" hidden />
+                                Mã Đơn Hàng: @donHang.MaDonHang
+                            </th>
+                            <th>Ngày đặt: @donHang.NgayDat</th>
+                        </tr>
+                        <tr>
+                            <th>Tên người gửi: @donHang.TenNguoiNhan</th>
+                            <th>Số điện thoại: @donHang.SoDienThoaiNguoiNhan</th>
+                        </tr>
+                        <tr>
+                            <th>Địa chỉ gửi: @donHang.DiaChiNguoiNhan</th>
+                            <th style="display: flex; align-items: center;">Ngày gửi: <input type="date" name="dNgaygui" class="form-control" style="width: 40%" /></th>
+                        </tr>
+                    </thead>
+                    <tr>
+                        <td colspan="2">
+                            <table  class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Chọn</th>
+                                        <th>Mã Sách</th>
+                                        <th>Tên Sách</th>
+                                        <th>Số lượng</th>
+                                        <th>Ngày Trả</th>
+                                        <th>Trạng Thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var chiTietDonThue in donHang.ChiTietDonThues)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @if (chiTietDonThue.TinhTrangTraSach == "Chưa trả sách")
+                                                {
+                                                    <input type="checkbox" name="selectedSach" value="@chiTietDonThue.MaSach" />
+                                                }
+
+                                            </td>
+                                            <td>@chiTietDonThue.MaSach</td>
+                                            <td>
+                                                <img alt="@chiTietDonThue.Sach.Tensach" src="~/image/@chiTietDonThue.Sach.Anhbia" width="15%" />
+                                                @chiTietDonThue.Sach.Tensach
+                                            </td>
+                                            <td>@chiTietDonThue.SoLuong</td>
+                                            <td>@chiTietDonThue.NgayTra</td>
+                                            <td>
+                                                @{
+                                                    DateTime ngayTra = chiTietDonThue.NgayTra ?? DateTime.MinValue; // Chuyển ngày trả sang kiểu DateTime, nếu null thì sử dụng DateTime.MinValue
+                                                    DateTime ngayHienTai = DateTime.Now;
+                                                    TimeSpan thoiGianConLai = ngayTra - ngayHienTai;
+
+                                                    string thongBao = "";
+
+                                                    if (chiTietDonThue.TinhTrangTraSach == "Chưa trả sách")
+                                                    {
+                                                        if (thoiGianConLai.TotalDays < 0)
+                                                        {
+                                                            thongBao = "Trễ hạn";
+                                                        }
+                                                        else if (thoiGianConLai.TotalDays <= 1)
+                                                        {
+                                                            thongBao = "Gần đến hạn";
+                                                        }
+                                                        else if (thoiGianConLai.TotalDays > 1)
+                                                        {
+                                                            thongBao = "Chưa đến hạn";
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        thongBao = chiTietDonThue.TinhTrangTraSach;
+                                                    }
+
+                                                    @thongBao
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                }
+                </tbody>
+                </table>
+
+                <input type="submit" value="Trả Sách" class="btn btn-success"/>
+            }
+        </div>
+    </div>
+
+
+

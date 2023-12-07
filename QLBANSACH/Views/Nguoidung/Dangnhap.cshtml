@@ -1,0 +1,72 @@
+﻿
+@{
+    ViewBag.Title = "Dangnhap";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+@if (ViewBag.SuccessMessage != null)
+{
+    
+    <div class="bs-toast toast toast-placement-ex m-2 fade bg-success top-50 start-50 translate-middle show" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000">
+        <div class="toast-header">
+            <i class="bx bx-bell me-2"></i>
+            <div class="me-auto fw-semibold">Thông báo</div>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">@ViewBag.SuccessMessage</div>
+    </div>
+}
+<div class="authentication-wrapper authentication-basic container-p-y" style="display: flex; justify-content: center;">
+    <div class="authentication-inner" style="width: 28%">
+        <!-- Register -->
+        <div class="card">
+            <div class="card-body">
+                <h3 style="text-align:center">ĐĂNG NHẬP</h3>
+                <h4 class="mb-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit; color: #057A59; font-size: 25px;">Chào mừng đến với TienBook</font></font></h4>
+                <p class="mb-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Vui lòng đăng nhập vào tài khoản của bạn</font></font></p>
+                <h4 style="color:red; text-align:center"> @ViewBag.Thongbao</h4>
+                @* <form id="formAuthentication" class="mb-3" action="index.html" method="POST">*@
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { @class = "mb-3", @id = "formAuthentication" }))
+                {
+                    @Html.ValidationSummary(true)
+                    <div class="mb-3">
+                        <label for="email" class="form-label"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Tên đăng nhập</font></font></label>
+                        @*<input type="text" class="form-control" id="email" name="email-username" placeholder="Nhập email hoặc tên người dùng của bạn" autofocus="">*@
+                        @Html.TextBox("TenDN", null, new { @class = "form-control", @id = "html5-text-input", placeholder = "Tên đăng nhập" })
+                        @ViewData["Loil"]
+                    </div>
+                    <div class="mb-3 form-password-toggle">
+                        <div class="d-flex justify-content-between">
+                            <label class="form-label" for="password"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Mật khẩu</font></font></label>
+                            <a href="#">
+                                <small><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Quên mật khẩu?</font></font></small>
+                            </a>
+                        </div>
+                        <div class="input-group input-group-merge">
+                            @Html.Password("Matkhau", null, new { @class = "form-control", @id = "password", placeholder = ".............." })
+                            @ViewData["Loi2"]
+                            <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="remember-me">
+                            <label class="form-check-label" for="remember-me"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Nhớ tôi </font></font></label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <button class="btn btn-success d-grid w-100" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Đăng nhập</font></font></button>
+                    </div>
+                }
+                @* </form>*@
+
+                <p class="text-center">
+                    <span><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Bạn chưa có thài khoản?</font></font></span>
+                    <font style="vertical-align: inherit;"><a href="/Nguoidung/Dangky"><span><font style="vertical-align: inherit;">Tạo một tài khoản</font></span></a></font><a href="auth-register-basic.html">
+                        <span><font style="vertical-align: inherit;"></font></span>
+                    </a>
+                </p>
+            </div>
+        </div>
+        <!-- /Register -->
+    </div>
+</div>

@@ -1,0 +1,246 @@
+﻿@using QLBANSACH.Models;
+@{
+    ViewBag.Title = "MyProfile";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+
+    KHACHHANG kh = (KHACHHANG)Session["Taikhoan"];
+    string formattedNgaySinh = kh.Ngaysinh?.ToString("yyyy-MM-dd");
+}
+<div class="card mb-4" style="width: 40%;">
+    <div class="card-header align-items-center justify-content-between">
+        <h2 class="mb-0">Thông tin khách hàng</h2>
+    </div>
+    <div class="card-body">
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="basic-default-name">Mã Khách hàng</label>
+            <div class="col-sm-10">
+                <b class="form-control">@kh.MaKH</b>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="basic-default-name">Họ và Tên</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="txtHoTen" value="@kh.HoTen">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="basic-default-name">Tài khoản</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="txtTaiKhoan" value="@kh.Taikhoan">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="basic-default-name">Email</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="txtEmail" value="@kh.Email">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="basic-default-name">Địa chỉ</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="txtDiaChi" value="@kh.DiachiKH">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="basic-default-name">Điện thoại</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="txtDienThoai" value="@kh.DienthoaiKH">
+            </div>
+        </div>
+        <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="basic-default-name">Ngày sinh</label>
+            <div class="col-sm-10">
+                <input type="date" class="form-control" id="txtNgaySinh" value="@formattedNgaySinh">
+            </div>
+        </div>
+        <div class="row justify-content-end">
+            <div class="col-sm-10">
+                <button id="btnLuu" class="btn btn-primary">Lưu</button>
+                <button class="btn btn-outline-info">Đổi mật khẩu</button>
+                <a class="btn btn-outline-secondary" href="/BookStore">Quay lại</a>
+            </div>
+        </div>
+    </div>
+</div>
+@*<div id="changePasswordForm" style="display: none;">
+    <h2>Thay đổi mật khẩu</h2>
+    <form id="passwordForm">
+        <div class="form-group">
+            <label for="currentPassword">Mật khẩu cũ:</label>
+            <input type="password" class="form-control" id="currentPassword" name="currentPassword">
+        </div>
+        <div class="form-group">
+            <label for="newPassword">Mật khẩu mới:</label>
+            <input type="password" class="form-control" id="newPassword" name="newPassword">
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Nhập lại mật khẩu mới:</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+        </div>
+        <button type="button" class="btn btn-primary" id="savePassword">Lưu</button>
+        <button type="button" class="btn btn-outline-secondary" id="cancelPassword">Hủy</button>
+    </form>
+</div>*@
+<div class="bs-toast toast toast-placement-ex m-2 fade top-50 start-50 translate-middle show" role="alert" aria-live="assertive" aria-atomic="true" id="changePasswordForm" style="display: none;">
+    <div class="toast-header">
+        <div class="me-auto fw-semibold">THAY ĐỔI MẬT KHẨU</div>
+    </div>
+    <form id="passwordForm">
+        <div class="form-label">
+            <label for="currentPassword">Mật khẩu cũ:</label>
+            <div class="input-group input-group-merge">
+                <input type="password" class="form-control" id="currentPassword" name="currentPassword">
+                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+            </div>
+        </div>
+        <div class="form-label">
+            <label for="newPassword">Mật khẩu mới:</label>
+            <div class="input-group input-group-merge">
+                <input type="password" class="form-control" id="newPassword" name="newPassword">
+                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+            </div>
+        </div>
+        <div class="form-label">
+            <label for="confirmPassword">Nhập lại mật khẩu mới:</label>
+            <div class="input-group input-group-merge">
+                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary" id="savePassword">Lưu</button>
+        <button type="button" class="btn btn-outline-secondary" id="cancelPassword">Hủy</button>
+    </form>
+</div>
+<style>
+    .col-sm-10 {
+        width: 71.333333%;
+    }
+
+    .col-sm-2 {
+        width: 27.666667%;
+    }
+
+    #content {
+        display: flex;
+        justify-content: center;
+    }
+    .toast.bs-toast {
+        background-color: rgba(255, 255, 255, 0.99);
+        padding: 20px;
+    }
+    .toast {
+        box-shadow: 0 0.25rem 1rem #376f18;
+    }
+    .btn-primary {
+        background-color: #40bd31;
+        border-color: #3d913b;
+    }
+
+
+</style>
+<script>
+    $(document).ready(function () {
+        // Đổi trạng thái hiển thị/ẩn mật khẩu khi nhấn vào biểu tượng
+        $(".input-group-text.cursor-pointer").click(function () {
+            var inputField = $(this).siblings("input");
+            if (inputField.attr("type") === "password") {
+                inputField.attr("type", "text");
+            } else {
+                inputField.attr("type", "password");
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        $("#changePasswordForm").hide();
+
+        // Hiển thị form khi nhấn nút "Đổi mật khẩu"
+        $(".btn-outline-info").click(function () {
+            $("#changePasswordForm").show();
+        });
+
+        // Ẩn form khi nhấn nút "Hủy"
+        $("#cancelPassword").click(function () {
+            $("#changePasswordForm").hide();
+        });
+
+        // Xử lý lưu mật khẩu khi nhấn nút "Lưu"
+        $("#savePassword").click(function () {
+            // Lấy giá trị từ các trường input
+            var currentPassword = $("#currentPassword").val();
+            var newPassword = $("#newPassword").val();
+            var confirmPassword = $("#confirmPassword").val();
+            var taiKhoan = $("#txtTaiKhoan").val();
+
+            $.ajax({
+                url: "/Nguoidung/ChangePassword", // Đường dẫn đến action xử lý thay đổi mật khẩu
+                type: "POST",
+                data: {
+                    CurrentPassword: currentPassword,
+                    NewPassword: newPassword,
+                    TaiKhoan: taiKhoan,
+                    ConfirmPassword: confirmPassword
+
+                },
+                success: function (result) {
+                    if (result === "success") {
+                        alert("Thay đổi mật khẩu thành công!");
+
+                        // Xóa giá trị trong các trường sau khi đổi mật khẩu thành công
+                        $("#currentPassword").val("");
+                        $("#newPassword").val("");
+                        $("#confirmPassword").val("");
+
+                        // Ẩn form sau khi xử lý xong
+                        $("#changePasswordForm").hide();
+                    } else if (result === "passwordMismatch") {
+                        alert("Xác nhận mật khẩu mới không khớp!");
+                        $("#changePasswordForm").show();
+                    } else if (result === "incorrectPassword") {
+                        alert("Mật khẩu cũ không đúng!");
+                        $("#changePasswordForm").show();
+                    } else {
+                        alert("Thay đổi mật khẩu thất bại!");
+                        $("#changePasswordForm").show();
+                    }
+                }
+            });
+
+            $("#changePasswordForm").hide();
+        });
+    });
+    $(document).ready(function () {
+        $("#btnLuu").click(function () {
+            // Lấy dữ liệu từ các trường input
+            var hoTen = $("#txtHoTen").val();
+            var taiKhoan = $("#txtTaiKhoan").val();
+            var email = $("#txtEmail").val();
+            var diaChi = $("#txtDiaChi").val();
+            var dienThoai = $("#txtDienThoai").val();
+            var ngaySinh = $("#txtNgaySinh").val();
+
+            // Gửi dữ liệu lên server để cập nhật
+            $.ajax({
+                url: "/Nguoidung/UpdateProfile", // Đường dẫn đến action cập nhật thông tin khách hàng
+                type: "POST",
+                data: {
+                    HoTen: hoTen,
+                    TaiKhoan: taiKhoan,
+                    Email: email,
+                    DiaChi: diaChi,
+                    DienThoai: dienThoai,
+                    NgaySinh: ngaySinh
+                },
+                success: function (result) {
+                    if (result === "success") {
+                        alert("Cập nhật thành công!");
+                    } else {
+                        alert("Cập nhật thất bại!");
+                    }
+                }
+            });
+        });
+    });
+</script>
+
+

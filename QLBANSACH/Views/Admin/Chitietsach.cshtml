@@ -1,0 +1,94 @@
+﻿@model QLBANSACH.Models.SACH
+
+@{
+    ViewBag.Title = "Chitietsach";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@helper Truncate(string input, int length)
+{
+    if (input.Length <= length)
+    {
+        @Html.Raw(input)
+    }
+    else
+    {
+        @Html.Raw(input.Substring(0, length)) <text>...</text>
+    }
+}
+
+<h2>THÔNG TIN CHI TIẾT SÁCH</h2>
+
+<div>
+    <h4>SACH</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên sách
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tensach)
+        </dd>
+
+        <dt>
+            Giá bán
+        </dt>
+
+        <dd>
+            @string.Format("{0:0,0}", Model.Giaban) VNĐ
+        </dd>
+
+        <dt>
+            Mô tả
+        </dt>
+
+        <dd style="width: 600px; text-align:justify">
+            @Truncate(Model.Mota, 1000)
+        </dd>
+
+        <dt>
+            Ảnh bìa
+        </dt>
+
+        <dd>
+            <img src="@Url.Content("~/image/"+ Model.Anhbia)" width="120px">
+        </dd>
+
+        <dt>
+            Ngày cập nhật
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngaycapnhat)
+        </dd>
+
+        <dt>
+            Số lượng tồn
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Soluongton)
+        </dd>
+
+        <dt>
+            Chủ đề
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CHUDE.TenChuDe)
+        </dd>
+
+        <dt>
+            Nhà xuất bản
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NHAXUATBAN.TenNXB)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Điều chỉnh", "Edit", new { id = Model.Masach }) |
+    @Html.ActionLink("Trở về", "Sach")
+</p>

@@ -1,0 +1,94 @@
+﻿@model List<QLBANSACH.Models.DonDatHang>
+
+@{
+    ViewBag.Title = "DonHangDaDat";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<div style="text-align: -webkit-center;">
+    <h2>Đơn Hàng Đã Đặt</h2>
+    @foreach (var donDatHang in Model)
+    {
+        <div class="card" style="width:90%">
+            <div style="text-align: left; display: flex; justify-content: space-between;">
+                <h5 class="card-header">Mã đơn hàng: @donDatHang.MaDonHang</h5>
+                <h4 class="card-header" style="color: red">Tổng đơn hàng: @String.Format("{0:0,0}", donDatHang.tongGiaTri) VNĐ </h4>
+            </div>
+            
+            <div class="demo-inline-spacing" style="text-align: left; margin-top:0px">
+                <div class="table-responsive text-nowrap" style=" margin-top:0px">
+                    <table class="table">
+                        <tbody class="trangthai">
+                            <tr>
+                                <td>Tên người nhận: <b>@donDatHang.TenNguoiNhan</b></td>
+                                <td>Số điện thoại: <b>@donDatHang.SoDienThoaiNguoiNhan</b></td>
+                            </tr>
+                            <tr><td colspan="3"><div class="dropdown-divider"></div></td></tr>
+                            <tr>
+                                <td style="padding-bottom: 25px;">Đại chỉ nhận hàng: <b>@donDatHang.DiaChiNguoiNhan</b></td>
+                                <td>Ngày đặt hàng: <b>@donDatHang.NgayDat</b></td>
+                                <td>Ngày giao dự kiến: <b>@donDatHang.NgayGiao</b></td>
+                            </tr>
+                            <tr><td colspan="3"><div class="dropdown-divider"></div></td></tr>
+                            <tr>
+                                <td style="padding-bottom: 25px;">Phí giao hàng: <b>20.000 VNĐ</b></td>
+                                <td style="padding-bottom: 25px;">Trạng thái thanh toán: <b>@donDatHang.TrangThaiThanhToan</b></td>
+                                <td style="padding-bottom: 25px;">Trạng thái giao hàng: <b>@donDatHang.TrangThaiGiaoHang</b></td>
+                            </tr>
+                        </tbody>
+                    </table>              
+                </div>
+            </div>
+                <div class="table-responsive text-nowrap">
+                    <table class="table" style="text-align:center">
+                        <caption class="ms-4">
+                            Danh sách sản phẩm
+                        </caption>
+                        <thead>
+                            <tr>
+                                <th>Tên sách</th>
+                                <th style="width:20%">Hình ảnh</th>
+                                <th style="width:12%">Số lượng</th>
+                                <th style="width:12%">Đơn giá</th>
+                                <th style="width:12%">Thời gian</th>
+                                <th style="width:12%">Thành Tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var chiTiet in donDatHang.ChiTietDonDatHangs)
+                            {
+                                decimal? ThanhTien = chiTiet.SoLuong * chiTiet.DonGia;
+                                <tr>
+                                    <td>@chiTiet.Sach.Tensach</td>
+                                    <td><img alt="@chiTiet.Sach.Tensach" src="~/image/@chiTiet.Sach.Anhbia" width="45%" /></td>
+
+                                    <td><b>@chiTiet.SoLuong</b></td>
+                                    <td><b>@String.Format("{0:0,0}", chiTiet.DonGia) VNĐ </b></td>
+                                    <td><b>@chiTiet.TenLoaiThue</b></td>
+                                    <td><b>@String.Format("{0:0,0}", ThanhTien) VNĐ </b></td>
+                                </tr>
+                            }
+                            @foreach (var chiTiet in donDatHang.ChiTietDonThues)
+                            {
+                                decimal? ThanhTien = chiTiet.SoLuong * chiTiet.DonGia * chiTiet.LoaiThue.TiLeGia;
+                                <tr>
+                                    <td>@chiTiet.Sach.Tensach</td>
+                                    <td><img alt="@chiTiet.Sach.Tensach" src="~/image/@chiTiet.Sach.Anhbia" width="45%" /></td>
+
+                                    <td><b>@chiTiet.SoLuong</b></td>
+                                    <td><b>@String.Format("{0:0,0}", chiTiet.DonGia) VNĐ </b></td>
+                                    <td><b>@chiTiet.TenLoaiThue</b></td>
+                                    <td><b>@String.Format("{0:0,0}", ThanhTien) VNĐ </b></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        <hr class="my-5">
+    }
+</div>
+<style>
+    .trangthai td {
+        border-style: none;
+    }
+</style>
